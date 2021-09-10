@@ -2,33 +2,51 @@ package playWithThreads.oddeventhread;
 
 public class OddEvenPrinter {
 
-	private boolean isEvenPrinted = true;
-	public synchronized void  printOdd(int oddNumber) {
+	private boolean isEvenPrinted = false;
+	Object lock = new Object();
+	public void printOddNumber(int number) {
 		
-		if(!isEvenPrinted) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		  synchronized (this) {
+			  if(!isEvenPrinted) {
+					try {
+						wait();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			  System.out.println(number);
+			  isEvenPrinted = false;
+			  try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			  notifyAll();
+			  
 		}
-		System.out.println(oddNumber);
-		notify();
-		isEvenPrinted = false;
-	}
-	public synchronized void printEven(int oddNumber) {
-		if(isEvenPrinted) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		System.out.println(oddNumber);
-		notify();
-		isEvenPrinted = true;
+			
 	}
 	
+	public void printEvenNumber(int number) {
+		synchronized (this) {
+			  if(isEvenPrinted) {
+					try {
+						wait();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			  System.out.println(number);
+			  isEvenPrinted = true;
+			  try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			  notifyAll();
+		}
+		
+	}
 }

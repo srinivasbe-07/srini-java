@@ -11,6 +11,6 @@ public interface PlayJava8 {
 		
 		Integer i3 = 127;
 		Integer i4 = 127;
-		System.out.println(i3 == i4);//false
+		System.out.println(i3 == i4);//true
 	}
 }

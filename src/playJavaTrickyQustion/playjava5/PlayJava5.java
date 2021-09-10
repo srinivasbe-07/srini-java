@@ -16,3 +16,4 @@ public class PlayJava5 {
 		a.name(null);//call string name because its more specific
 	}
 }
+ 	

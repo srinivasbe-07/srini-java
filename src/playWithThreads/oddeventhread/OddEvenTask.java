@@ -1,34 +1,32 @@
 package playWithThreads.oddeventhread;
 
-public class OddEvenTask implements Runnable{
+public class OddEvenTask implements Runnable {
 
-	private boolean isEven;
+	private boolean isOdd;
 	private OddEvenPrinter oddEvenPrinter;
-	
-	
 
-	public OddEvenTask(boolean isEven, OddEvenPrinter oddEvenPrinter) {
+	public OddEvenTask(OddEvenPrinter oddEvenPrinter, boolean isOdd) {
 		super();
-		this.isEven = isEven;
+		this.isOdd = isOdd;
 		this.oddEvenPrinter = oddEvenPrinter;
 	}
 
-
-
 	@Override
 	public void run() {
-		
-		int number = isEven ? 2 : 1;
-		while(number <= 10) {
-			if(isEven) {
-				oddEvenPrinter.printEven(number);
+
+
+		while (true) {
+			int number = isOdd ? 1 : 2;
+			while (true) {
+				if (isOdd) {
+					oddEvenPrinter.printEvenNumber(number);
+				} else {
+					oddEvenPrinter.printOddNumber(number);
+				}
+				
+				number += 2;
 			}
-			else {
-				oddEvenPrinter.printOdd(number);
-			}
-			number +=2;
 		}
-		
 	}
 
 }
