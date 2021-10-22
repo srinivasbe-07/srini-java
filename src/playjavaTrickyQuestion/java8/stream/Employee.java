@@ -3,11 +3,7 @@ package playjavaTrickyQuestion.java8.stream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 
 public class Employee {
 
@@ -71,6 +67,12 @@ public class Employee {
 		this.salary = salary;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", age=" + age + ", gender=" + gender + ", department="
+				+ department + ", yearOfJoining=" + yearOfJoining + ", salary=" + salary + "]";
+	}
 	public static void main(String[] args) {
 		List<Employee> employeeList = new ArrayList<>();
 	    employeeList.add(new Employee(111,"Jeiya Brian", 32, "female", "HR", 2011, 25000.0f)); 
@@ -104,74 +106,76 @@ public class Employee {
 
 	    employeeList.add(new Employee(181,"sangiv pandey", 25, "male", "Product and Devlopment", 2012, 37000.0f));
 	    
-	    //Q. 1. How many male female employee are there in organization
-	    Map<String, Long> noOfMaleAndFemale = employeeList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
-	    System.out.println(noOfMaleAndFemale);
-	    
-	    //Q2. print the name off all department in the organigation
-	    
-	    List<String> departments = employeeList.stream().map(e->e.getDepartment()).distinct().collect(Collectors.toList());
-	    System.out.println(departments);
-	    
-	    //Q3. Average age of male and female
-	    Map<String, Double> avgMaileFemaleAge = employeeList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.averagingInt(Employee::getAge)));
-	    System.out.println(avgMaileFemaleAge);
-	    
-	    //Q4 Higest payed employee
-	    Optional<Employee> reachestEmployee =  employeeList.stream().max(Comparator.comparingDouble(Employee::getSalary));
-	    System.out.println("Reachest Employee:" + reachestEmployee.get().getName());
-	    
-	    //get all employee who joined after 2015
-       List<String> employeName_2015 = employeeList.stream().filter(emp->emp.getYearOfJoining()>=2015).map(Employee::getName).collect(Collectors.toList());
-       System.out.println(employeName_2015);
-       
-	    //count the no of employee in each department
-       
-       System.out.println(employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting())));
-       
-       //average salary of each department
-       
-       System.out.println(employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingDouble(Employee::getSalary))));
-       
-       //yongest male
-       System.out.println(employeeList.stream().filter(emp-> emp.getGender() == "male").min(Comparator.comparingInt(Employee::getAge)).get().getName());
-       
-     //yongest female
-       System.out.println(employeeList.stream().filter(emp-> emp.getGender() == "female").min(Comparator.comparingInt(Employee::getAge)).get().getName());
-     //males and females in product
-       
-      System.out.println(employeeList.stream().filter(emp->emp.getDepartment().equals("Product and Devlopment")).collect(Collectors.groupingBy(Employee::getGender, Collectors.counting())));
-     // most working experance
-      
-     System.out.println(employeeList.stream().min(Comparator.comparingInt(Employee::getYearOfJoining)).get().getName()); 
-	
-     //males and femailes in sales and marketing team
-     System.out.println(employeeList.stream().filter(emp->emp.getDepartment().equals("Sale and Marketing")).collect(Collectors.groupingBy(Employee::getGender, Collectors.counting())));
-     
-     //average sallary of male and female employee
-     System.out.println((employeeList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.averagingDouble(Employee::getSalary)))));
-	
-	//list out all name of each department
-     
-     Map<String, List<Employee>> list = employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment));
-     for(String str : list.keySet()) {
-    	 
-    	 System.out.println("*******************" + str + "**************************");
-    	 for(Employee emp : list.get(str)) {
-    		 System.out.println(emp.getName());
-    	 }
-    	 }
-     
-     // Average and total salary of whole employee
-     
-    System.out.println(employeeList.stream().collect(Collectors.summarizingDouble(Employee::getSalary)));
-    
-    Map<Boolean, List<Employee>> emppL = employeeList.stream().collect(Collectors.partitioningBy(emp->emp.getAge() > 25));
-    System.out.println("**********Salary less then 25*********");
-    System.out.println(emppL.get(true).stream().map(emp->emp.getName()).collect(Collectors.toList()));
-    
-    System.out.println("**********Salary grater then 25*********");
-    System.out.println(emppL.get(false).stream().map(emp->emp.getName()).collect(Collectors.toList()));
+	    System.out.println(employeeList.stream().collect(Collectors.summarizingDouble(Employee::getSalary))); 
+//	    
+//	    //Q. 1. How many male female employee are there in organization
+//	    Map<String, Long> noOfMaleAndFemale = employeeList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
+//	    System.out.println(noOfMaleAndFemale);
+//	    
+//	    //Q2. print the name off all department in the organigation
+//	    
+//	    List<String> departments = employeeList.stream().map(e->e.getDepartment()).distinct().collect(Collectors.toList());
+//	    System.out.println(departments);
+//	    
+//	    //Q3. Average age of male and female
+//	    Map<String, Double> avgMaileFemaleAge = employeeList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.averagingInt(Employee::getAge)));
+//	    System.out.println(avgMaileFemaleAge);
+//	    
+//	    //Q4 Higest payed employee
+//	    Optional<Employee> reachestEmployee =  employeeList.stream().max(Comparator.comparingDouble(Employee::getSalary));
+//	    System.out.println("Reachest Employee:" + reachestEmployee.get().getName());
+//	    
+//	    //get all employee who joined after 2015
+//       List<String> employeName_2015 = employeeList.stream().filter(emp->emp.getYearOfJoining()>=2015).map(Employee::getName).collect(Collectors.toList());
+//       System.out.println(employeName_2015);
+//       
+//	    //count the no of employee in each department
+//       
+//       System.out.println(employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting())));
+//       
+//       //average salary of each department
+//       
+//       System.out.println(employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingDouble(Employee::getSalary))));
+//       
+//       //yongest male
+//       System.out.println(employeeList.stream().filter(emp-> emp.getGender() == "male").min(Comparator.comparingInt(Employee::getAge)).get().getName());
+//       
+//     //yongest female
+//       System.out.println(employeeList.stream().filter(emp-> emp.getGender() == "female").min(Comparator.comparingInt(Employee::getAge)).get().getName());
+//     //males and females in product
+//       
+//      System.out.println(employeeList.stream().filter(emp->emp.getDepartment().equals("Product and Devlopment")).collect(Collectors.groupingBy(Employee::getGender, Collectors.counting())));
+//     // most working experance
+//      
+//     System.out.println(employeeList.stream().min(Comparator.comparingInt(Employee::getYearOfJoining)).get().getName()); 
+//	
+//     //males and femailes in sales and marketing team
+//     System.out.println(employeeList.stream().filter(emp->emp.getDepartment().equals("Sale and Marketing")).collect(Collectors.groupingBy(Employee::getGender, Collectors.counting())));
+//     
+//     //average sallary of male and female employee
+//     System.out.println((employeeList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.averagingDouble(Employee::getSalary)))));
+//	
+//	//list out all name of each department
+//     
+//     Map<String, List<Employee>> list = employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment));
+//     for(String str : list.keySet()) {
+//    	 
+//    	 System.out.println("*******************" + str + "**************************");
+//    	 for(Employee emp : list.get(str)) {
+//    		 System.out.println(emp.getName());
+//    	 }
+//    	 }
+//     
+//     // Average and total salary of whole employee
+//     
+//    System.out.println(employeeList.stream().collect(Collectors.summarizingDouble(Employee::getSalary)));
+//    
+//    Map<Boolean, List<Employee>> emppL = employeeList.stream().collect(Collectors.partitioningBy(emp->emp.getAge() > 25));
+//    System.out.println("**********Salary less then 25*********");
+//    System.out.println(emppL.get(true).stream().map(emp->emp.getName()).collect(Collectors.toList()));
+//    
+//    System.out.println("**********Salary grater then 25*********");
+//    System.out.println(emppL.get(false).stream().map(emp->emp.getName()).collect(Collectors.toList()));
      
 	}
 	

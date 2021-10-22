@@ -12,7 +12,6 @@ public class ReverseString {
 
 		// 1. convert string into byte
 		System.out.println("***********1. convert string into byte***********");
-
 		byte[] strIntoByte = input.getBytes();
 		byte[] result = new byte[strIntoByte.length];
 

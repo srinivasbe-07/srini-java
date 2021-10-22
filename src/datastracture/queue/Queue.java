@@ -1,6 +1,5 @@
 package datastracture.queue;
 
-import java.util.NoSuchElementException;
 
 public class Queue {
 	int front;

@@ -19,7 +19,6 @@ public class PCFactory implements ComputerAbstractFactory{
 
 	@Override
 	public Computer createComputer() {
-		// TODO Auto-generated method stub
 		return new PC(ram,  hdd, cpu);
 	}
 

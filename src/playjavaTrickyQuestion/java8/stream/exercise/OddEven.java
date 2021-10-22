@@ -23,7 +23,7 @@ public class OddEven {
 			return "odd numbers";}, Collectors.toList()));
 	System.out.println(out);
 	Map<Boolean, List<Integer>> oddEvenList = num.stream().collect(Collectors.partitioningBy(n->n%2!=0));
-	System.out.println(oddEvenList.get(true).stream().collect(Collectors.toList()));
+	System.out.println(oddEvenList.get(true));
 	System.out.println(oddEvenList.get(false).stream().collect(Collectors.toList()));
 
 }

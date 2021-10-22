@@ -16,8 +16,5 @@ public class ReduceDemo {
 		List<String> characters = Arrays.asList("a","b", "c", "d");
 		System.out.println(characters.stream().reduce("", (partial, ch)-> partial + ch));
 		System.out.println(characters.stream().reduce("", String::concat));
-		
-
-		
 	}
 }

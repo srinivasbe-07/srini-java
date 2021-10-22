@@ -1,11 +1,6 @@
 package array.minmax;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
 
 
 
@@ -14,7 +9,7 @@ public class MaxProfit {
 	public static int maxProfitSolution1(int[] numbers) {
 	    int buy, maxProfit = 0;
 		for(int i = 0; i < numbers.length; i++) {
-			buy= numbers[i];
+			buy = numbers[i];
 			for(int j = i+1; j< numbers.length; j++) {
 					maxProfit = Math.max(numbers[j]-buy, maxProfit);
 				
