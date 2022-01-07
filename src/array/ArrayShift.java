@@ -14,7 +14,7 @@ public class ArrayShift {
 
 			// with out extra memory and compexity O(m*n)
 			int len = arr.length;
-			for (int i = 0; i < d; i++) {
+			for (int i = 0; i < d; i++ ) {
 				int curr = arr[0];
 				for (int j = 0; j < len - 1; j++) {
 					int temp = arr[j+1];
